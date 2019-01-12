@@ -34,6 +34,17 @@ export class User extends BaseEntity {
   @Column()
   password: string;
 
+  @Column("timestamp", {
+    default: () => "CURRENT_TIMESTAMP"
+  })
+  createdAt: Date;
+
+  @Column("timestamp", {
+    default: () => "CURRENT_TIMESTAMP",
+    onUpdate: "CURRENT_TIMESTAMP"
+  })
+  updatedAt: Date;
+
   /*this is schema field and is not saved into the database*/
   @Field()
   name(@Root() parent: User): string {

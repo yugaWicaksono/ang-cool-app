@@ -6,7 +6,7 @@
   "username": "admin",
   "password": "supersecret2019password",
   "database": "angular_cool",
-  "synchronize": false,
+  "synchronize": true,
   "logging": true,
   "multipleStatements": true,
   "migrations": ["src/migration/**/*.ts"],

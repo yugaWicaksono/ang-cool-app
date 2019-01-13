@@ -1,9 +1,7 @@
 mat-card {
-  margin: 15% 40%;
+  margin: 10% 20%;
 }
 
-.example-fill-remaining-space {
-  /* This fills the remaining space, by using flexbox. 
-     Every toolbar row uses a flexbox row layout. */
+.input-example-full-width {
   flex: 1 1 auto;
 }

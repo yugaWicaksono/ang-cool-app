@@ -5,25 +5,26 @@ import { CustomMaterialModule } from '../core/material.module';
 import { AppRoutingModule } from '../core/app.routing.module';
 import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
-import { LoginComponent } from './login/login.component';
+import { LoginComponent, LoginService } from './login/login.component';
 import { UserComponent } from './user/user.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ApolloModule, APOLLO_OPTIONS } from 'apollo-angular';
 import { HttpLinkModule, HttpLink } from 'apollo-angular-link-http';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { ToolbarComponent } from './toolbar/toolbar.component';
+import { NotFoundPageComponent } from './not-found-page/not-found-page.component';
 
 @NgModule({
-  declarations: [AppComponent, LoginComponent, UserComponent, ToolbarComponent],
+  declarations: [AppComponent, LoginComponent, UserComponent, ToolbarComponent, NotFoundPageComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     CustomMaterialModule,
     FormsModule,
-    AppRoutingModule,
     ApolloModule,
     HttpLinkModule,
-    HttpClientModule
+    HttpClientModule,
+    AppRoutingModule
   ],
   providers: [
     {
@@ -38,7 +39,8 @@ import { ToolbarComponent } from './toolbar/toolbar.component';
         };
       },
       deps: [HttpLink]
-    }
+    },
+    [LoginService]
   ],
   bootstrap: [AppComponent]
 })

@@ -1,7 +1,13 @@
-mat-card {
-  margin: 10% 20%;
+.login-card {
+  margin: 10% 40%;
+  width: 20%;
 }
 
-.input-example-full-width {
-  flex: 1 1 auto;
+.login-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.login-form > * {
+  width: 100%;
 }

@@ -1,44 +1,39 @@
 <!-- this is the form  -->
 
-<mat-card class="example-card">
+<mat-card class="login-card">
   <mat-card-header> <mat-card-title>Login</mat-card-title> </mat-card-header>
   <mat-card-content>
-    <form class="example-form">
-      <table class="example-full-width" cellspacing="0">
-        <tr>
-          <td>
-            <mat-form-field>
-              <input
-                class="input-example-full-width"
-                matInput
-                placeholder="Username"
-                [(ngModel)]="username"
-                name="username"
-                required
-              />
-            </mat-form-field>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <mat-form-field>
-              <input
-                class="input-example-full-width"
-                matInput
-                placeholder="Password"
-                [(ngModel)]="password"
-                type="password"
-                name="password"
-                required
-              />
-            </mat-form-field>
-          </td>
-        </tr>
-      </table>
+    <form class="login-form">
+      <mat-form-field>
+        <input
+          matInput
+          placeholder="Email"
+          [(ngModel)]="email"
+          name="email"
+          required
+        />
+      </mat-form-field>
+      <mat-form-field>
+        <input
+          matInput
+          placeholder="Password"
+          [(ngModel)]="password"
+          type="password"
+          name="password"
+          required
+        />
+      </mat-form-field>
     </form>
     <mat-spinner [style.display]="showSpinner ? 'block' : 'none'"></mat-spinner>
   </mat-card-content>
   <mat-card-actions>
-    <button mat-raised-button (click)="login()" color="primary">Login</button>
+    <button
+      class="login-card-buttons"
+      mat-raised-button
+      (click)="userLogin(email, password)"
+      color="primary"
+    >
+      Login
+    </button>
   </mat-card-actions>
 </mat-card>

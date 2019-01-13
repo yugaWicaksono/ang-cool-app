@@ -7,24 +7,20 @@ import { UserContext } from "../../types/UserContext";
 export class LoginResolver {
   @Mutation(() => User, { nullable: true })
   /* this is mutation function that when it is called will send data back to database */
-  async Login(
+  async LOGIN(
     @Arg("email") email: string,
     @Arg("password") password: string,
     @Ctx() ctx: UserContext
-  ): Promise<User> {
+  ): Promise<User | null> {
     const user = await User.findOne({ where: { email } });
     if (!user) {
-      throw new Error(
-        "The information your provided is incorrect, please try again"
-      );
+      return null;
     }
 
     const valid = await bcrypt.compare(password, user.password);
 
     if (!valid) {
-      throw new Error(
-        "The information your provided is incorrect, please try again"
-      );
+      return null;
     }
 
     // adding the ! will make sure that the input is valid

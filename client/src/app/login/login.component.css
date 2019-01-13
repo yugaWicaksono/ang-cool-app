@@ -1,9 +1,13 @@
-mat-card {
-  margin: 15% 40%;
+.login-card {
+  margin: 10% 40%;
+  width: 20%;
 }
 
-.example-fill-remaining-space {
-  /* This fills the remaining space, by using flexbox. 
-     Every toolbar row uses a flexbox row layout. */
-  flex: 1 1 auto;
+.login-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.login-form > * {
+  width: 100%;
 }

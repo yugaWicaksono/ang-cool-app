@@ -7,7 +7,7 @@ export class LoggedUserResolver {
   @Query(() => User, { nullable: true })
   async LoggedUser(@Ctx() ctx: UserContext): Promise<User | undefined> {
     if (!ctx.req.session!.userId) {
-      return;
+      return undefined;
     }
     return User.findOne(ctx.req.session!.userId);
   }

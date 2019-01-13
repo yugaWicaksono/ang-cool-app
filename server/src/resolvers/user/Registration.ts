@@ -9,7 +9,7 @@ export class RegisterResolver {
   @UseMiddleware(isAuth)
   @Query(() => String)
   async hello() {
-    return "hello";
+    return "hello this is a test";
   }
 
   @Mutation(() => User)

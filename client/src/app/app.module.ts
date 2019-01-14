@@ -7,23 +7,29 @@ import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { LoginComponent, LoginService } from './login/login.component';
 import { UserComponent } from './user/user.component';
-import { HttpClientModule } from '@angular/common/http';
-import { ApolloModule, APOLLO_OPTIONS } from 'apollo-angular';
-import { HttpLinkModule, HttpLink } from 'apollo-angular-link-http';
-import { InMemoryCache } from 'apollo-cache-inmemory';
 import { ToolbarComponent } from './toolbar/toolbar.component';
 import { NotFoundPageComponent } from './not-found-page/not-found-page.component';
+import { APOLLO_OPTIONS, ApolloModule } from 'apollo-angular';
+import { HttpLink, HttpLinkModule } from 'apollo-angular-link-http';
+import { InMemoryCache } from 'apollo-cache-inmemory';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
-  declarations: [AppComponent, LoginComponent, UserComponent, ToolbarComponent, NotFoundPageComponent],
+  declarations: [
+    AppComponent,
+    LoginComponent,
+    UserComponent,
+    ToolbarComponent,
+    NotFoundPageComponent
+  ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     CustomMaterialModule,
     FormsModule,
     ApolloModule,
-    HttpLinkModule,
     HttpClientModule,
+    HttpLinkModule,
     AppRoutingModule
   ],
   providers: [
@@ -32,9 +38,9 @@ import { NotFoundPageComponent } from './not-found-page/not-found-page.component
       useFactory(httpLink: HttpLink) {
         return {
           cache: new InMemoryCache(),
-          connectToDevTools: true,
           link: httpLink.create({
-            uri: 'http://127.0.0.1:4005/graphql'
+            uri: 'http://localhost:4005/graphql',
+            withCredentials: true
           })
         };
       },

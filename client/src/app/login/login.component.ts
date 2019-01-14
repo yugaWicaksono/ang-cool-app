@@ -6,8 +6,9 @@ import gql from 'graphql-tag';
 @Injectable()
 export class LoginService {
   mutation = gql`
-    mutation Login($email: String!, $password: String!) {
-      Login(email: $email, password: $password) {
+    mutation login($email: String!, $password: String!) {
+      login(email: $email, password: $password) {
+        id
         name
         age
       }
@@ -33,11 +34,18 @@ export class LoginService {
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
+  data: any;
+
   constructor(private LoginAction: LoginService, private router: Router) {}
 
-  userLogin(email, password) {
-    this.LoginAction.login(email, password).subscribe(() => {
-      this.router.navigateByUrl('user');
+  async userLogin(email, password) {
+    await this.LoginAction.login(email, password).subscribe(data => {
+      console.log(data);
+      if (data.login !== null) {
+        this.router.navigate(['users']);
+      } else {
+        this.router.navigate(['']);
+      }
     });
   }
 }

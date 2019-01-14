@@ -29,6 +29,10 @@ const main = async () => {
   const apolloServer = new ApolloServer({
     schema,
     formatError: formatArgumentValidationError,
+    engine: {
+      apiKey: process.env.ENGINE_API_KEY
+    },
+    introspection: true,
     context: ({ req }: any) => ({ req })
   });
 
@@ -41,33 +45,39 @@ const main = async () => {
   app.use(
     cors({
       credentials: true,
-      origin: "http://localhost:4200"
-    })
-  );
-
-  app.use(
+      origin: "http://localhost:4200",
+      allowedHeaders: ["Content-Type", "Authorization"]
+    }),
     session({
       store: new RedisStore({
         client: redis as any
       }),
       name: "sid",
-      secret: "uew37fu3gfg2fbeyf2u3hf!",
+      secret: "uew37fu3gfg2fbeyf2u3hf",
       resave: false,
-      saveUnitialized: false,
+      saveUninitialized: false,
       cookie: {
         httpOnly: true,
-        secure: process.env.NODE_ENV === "production",
-        maxAge: 1000 * 60 * 60 * 4 // 4 hours(msec,sec,minute,hours,days)
+        secure: false, //process.env.NODE_ENV === "production",
+        maxAge: 1000 * 60 * 60 * 4 // --> prior 4 hours(msec,sec,minute,hours,days)
       }
     } as any)
   );
 
-  apolloServer.applyMiddleware({ app });
+  apolloServer.applyMiddleware({ app, cors: false });
 
   app.listen(port, () => {
-    console.log("🚀 " + " " + `server started on http://localhost:${port}`);
+    const startTime = new Date();
+
     console.log(
-      "💻 " + " " + ` graphql playground: http://localhost:${port}/graphql`
+      "==================================================================== \n" +
+        "🚀 " +
+        " " +
+        `server started ${startTime} on http://localhost:${port}\n` +
+        "💻 " +
+        " " +
+        ` graphql playground: http://localhost:${port}/graphql\n` +
+        "====================================================================="
     );
   });
 };

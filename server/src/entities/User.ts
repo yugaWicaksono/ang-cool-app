@@ -22,7 +22,7 @@ export class User extends BaseEntity {
   lastName: string;
 
   @Field()
-  @Column()
+  @Column("INTEGER")
   age: number;
 
   @Field()

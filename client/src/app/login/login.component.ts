@@ -1,32 +1,6 @@
-import { Component, OnInit, Injectable } from '@angular/core';
-import { Apollo } from 'apollo-angular';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import gql from 'graphql-tag';
-
-@Injectable()
-export class LoginService {
-  mutation = gql`
-    mutation login($email: String!, $password: String!) {
-      login(email: $email, password: $password) {
-        id
-        name
-        age
-      }
-    }
-  `;
-
-  constructor(private apollo: Apollo) {}
-
-  login(email, password) {
-    return this.apollo.mutate({
-      mutation: this.mutation,
-      variables: {
-        email: email,
-        password: password
-      }
-    });
-  }
-}
+import { LoginService } from '../graphql/mutations/AuthServices';
 
 @Component({
   selector: 'app-login',
@@ -34,15 +8,12 @@ export class LoginService {
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
-  data: any;
-
   constructor(private LoginAction: LoginService, private router: Router) {}
 
-  async userLogin(email, password) {
-    await this.LoginAction.login(email, password).subscribe(data => {
-      console.log(data);
-      if (data.login !== null) {
-        this.router.navigate(['users']);
+  userLogin(email: string, password: string) {
+    this.LoginAction.login(email, password).subscribe(data => {
+      if (data !== undefined) {
+        this.router.navigate(['user']);
       } else {
         this.router.navigate(['']);
       }

@@ -21,6 +21,7 @@ const main = async () => {
   const schema = await buildSchema({
     resolvers: [RegisterResolver, LoginResolver, LoggedUserResolver],
     authChecker: ({ context: { req } }) => {
+      console.log(req.session.userId);
       return !!req.session.userId; // if undefined return false, if set return true
     }
   });

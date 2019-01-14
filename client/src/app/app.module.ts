@@ -5,7 +5,7 @@ import { CustomMaterialModule } from '../core/material.module';
 import { AppRoutingModule } from '../core/app.routing.module';
 import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
-import { LoginComponent, LoginService } from './login/login.component';
+import { LoginComponent } from './login/login.component';
 import { UserComponent } from './user/user.component';
 import { ToolbarComponent } from './toolbar/toolbar.component';
 import { NotFoundPageComponent } from './not-found-page/not-found-page.component';
@@ -13,6 +13,9 @@ import { APOLLO_OPTIONS, ApolloModule } from 'apollo-angular';
 import { HttpLink, HttpLinkModule } from 'apollo-angular-link-http';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { HttpClientModule } from '@angular/common/http';
+import { LoginService } from './graphql/mutations/AuthServices';
+import { UserFeedComponent } from './user-feed/user-feed.component';
+import { HomePageComponent } from './home-page/home-page.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +23,9 @@ import { HttpClientModule } from '@angular/common/http';
     LoginComponent,
     UserComponent,
     ToolbarComponent,
-    NotFoundPageComponent
+    NotFoundPageComponent,
+    UserFeedComponent,
+    HomePageComponent
   ],
   imports: [
     BrowserModule,

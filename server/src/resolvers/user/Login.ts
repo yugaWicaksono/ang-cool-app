@@ -23,6 +23,11 @@ export class LoginResolver {
       return null;
     }
 
+    if (!user.confirmed) {
+      //TODO: something to handle error
+      return null;
+    }
+
     // adding the ! will make sure that the input is valid
     ctx.req.session!.userId = user.id;
 

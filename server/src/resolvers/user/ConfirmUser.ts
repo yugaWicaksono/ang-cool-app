@@ -12,7 +12,15 @@ export class ConfirmUserResolver {
       return false;
     }
 
-    await User.update({ id: parseInt(userId, 10) }, { confirmed: true });
+    const user = await User.findOne(userId);
+
+    if (!user) {
+      return false;
+    }
+
+    user.confirmed = await true;
+
+    await user.save();
     await redis.del(token);
 
     return true;

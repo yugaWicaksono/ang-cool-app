@@ -13,6 +13,7 @@ import { LoggedUserResolver } from "./resolvers/user/LoggedUser";
 import { ConfirmUserResolver } from "./resolvers/user/ConfirmUser";
 import { ForgotPasswordResolver } from "./resolvers/user/ForgotPassword";
 import { ChangePasswordResolver } from "./resolvers/user/ChangePassword";
+import { LogoutResolver } from "./resolvers/user/Logout";
 
 const main = async () => {
   // build the schema
@@ -25,6 +26,7 @@ const main = async () => {
     resolvers: [
       RegisterResolver,
       LoginResolver,
+      LogoutResolver,
       LoggedUserResolver,
       ConfirmUserResolver,
       ForgotPasswordResolver,
@@ -44,7 +46,7 @@ const main = async () => {
       apiKey: process.env.ENGINE_API_KEY
     },
     introspection: true,
-    context: ({ req }: any) => ({ req })
+    context: ({ req, res }: any) => ({ req, res })
   });
 
   // redis store setup

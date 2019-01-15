@@ -21,9 +21,8 @@ export async function sendEmail(email: string, url: string) {
     from: '"Fred Foo 👻" <foo@example.com>', // sender address
     to: email, // list of receivers
     subject: "Hello ✔", // Subject line
-    text:
-      "Thank You For your Registration. To confirm your registration please click the link below", // plain text body
-    html: `<a href=${url}> Click here to confirm your email </a>` // html body
+    text: "Please click the link to confirm your action", // plain text body
+    html: `<a href=${url}> Click here  </a>` // html body
   };
 
   // send mail with defined transport object

@@ -10,7 +10,9 @@ import cors from "cors";
 import { RegisterResolver } from "./resolvers/user/Registration";
 import { LoginResolver } from "./resolvers/user/Login";
 import { LoggedUserResolver } from "./resolvers/user/LoggedUser";
-import { ConfirmUserResolver } from "./resolvers/user/ConfirmedUser";
+import { ConfirmUserResolver } from "./resolvers/user/ConfirmUser";
+import { ForgotPasswordResolver } from "./resolvers/user/ForgotPassword";
+import { ChangePasswordResolver } from "./resolvers/user/ChangePassword";
 
 const main = async () => {
   // build the schema
@@ -24,7 +26,9 @@ const main = async () => {
       RegisterResolver,
       LoginResolver,
       LoggedUserResolver,
-      ConfirmUserResolver
+      ConfirmUserResolver,
+      ForgotPasswordResolver,
+      ChangePasswordResolver
     ],
     authChecker: ({ context: { req } }) => {
       console.log(req.session.userId);

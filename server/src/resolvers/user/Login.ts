@@ -7,7 +7,7 @@ import { UserContext } from "../../types/UserContext";
 export class LoginResolver {
   @Mutation(() => User, { nullable: true })
   /* this is mutation function that when it is called will send data back to database */
-  async LOGIN(
+  async login(
     @Arg("email") email: string,
     @Arg("password") password: string,
     @Ctx() ctx: UserContext

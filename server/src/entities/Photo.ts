@@ -1,8 +1,9 @@
-import { Column, PrimaryColumn, Entity } from "typeorm";
-
+import { Column, PrimaryGeneratedColumn, Entity } from "typeorm";
+import { Field, ID } from "type-graphql";
 @Entity()
 export class Photo {
-  @PrimaryColumn("int", { generated: true })
+  @Field(() => ID)
+  @PrimaryGeneratedColumn()
   id: number;
 
   @Column()

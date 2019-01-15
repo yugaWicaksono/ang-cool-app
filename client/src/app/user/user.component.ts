@@ -1,39 +1,38 @@
-import { Component, OnInit } from '@angular/core';
+// absolute imports ;
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Apollo } from 'apollo-angular';
-import gql from 'graphql-tag';
-import { Query } from '../types';
 
-// We use the gql tag to parse our query string into a query document
-const hello = gql`
-  query hello {
-    hello
-  }
-`;
+// relative import;
+import { Query, LoggedUser } from '../graphql/types/Query';
+import { LOGGED_USER } from '../graphql/queries/LoggedUser';
+import { Subscription } from 'apollo-client/util/Observable';
 
 @Component({
   selector: 'app-user',
   templateUrl: './user.component.html',
   styleUrls: ['./user.component.css']
 })
-export class UserComponent implements OnInit {
+export class UserComponent implements OnInit, OnDestroy {
   loading: boolean;
-  hello: any;
+  loggedUser: LoggedUser;
+
+  private querySubscription: Subscription;
 
   constructor(private apollo: Apollo) {}
 
   ngOnInit() {
-    this.apollo
+    this.querySubscription = this.apollo
       .watchQuery<Query>({
-        query: hello
+        query: LOGGED_USER
       })
       .valueChanges.subscribe(({ data, loading }) => {
         console.log(data);
         this.loading = loading;
-        this.hello = data.hello;
+        this.loggedUser = data.loggedUser;
       });
   }
 
-  // ngOnDestroy() {
-  //   this.querySubscription.unsubscribe();
-  // }
+  ngOnDestroy(): void {
+    this.querySubscription.unsubscribe();
+  }
 }

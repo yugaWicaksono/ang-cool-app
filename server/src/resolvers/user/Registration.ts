@@ -12,7 +12,7 @@ export class RegisterResolver {
     return "hello this is a test";
   }
 
-  @Mutation(() => User)
+  @Mutation(() => Boolean)
   /* this is mutation function that when it is called will send data back to database */
   async Registration(@Arg("userData")
   {
@@ -21,7 +21,7 @@ export class RegisterResolver {
     age,
     email,
     password
-  }: RegisterInput): Promise<User> {
+  }: RegisterInput) {
     const hashedPassword = await bcrypt.hash(password, 12);
 
     const user = await User.create({
@@ -32,6 +32,7 @@ export class RegisterResolver {
       password: hashedPassword
     }).save();
 
-    return user;
+    user;
+    return true;
   }
 }

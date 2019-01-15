@@ -1,3 +1,4 @@
+<h1 *ngIf="loading">loading....</h1>
 <mat-card class="example-card">
   <mat-card-header>
     <mat-card-title>User Data</mat-card-title>
@@ -9,26 +10,48 @@
           <td>
             <mat-form-field>
               <input
-                class="input-example-full-width"
                 matInput
-                placeholder="greetings"
-                [(ngModel)]="hello"
-                name="username"
+                placeholder="First Name"
+                [(ngModel)]="loggedUser.firstName"
+                name="firstName"
               />
             </mat-form-field>
           </td>
         </tr>
         <tr>
           <td>
-            <!-- <mat-form-field>
+            <mat-form-field>
               <input
-                class="input-example-full-width"
                 matInput
-                [(ngModel)]="age"
-                placeholder="Age"
-                name="password"
+                placeholder="Last Name"
+                [(ngModel)]="loggedUser.lastName"
+                name="lastName"
               />
-            </mat-form-field> -->
+            </mat-form-field>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <mat-form-field>
+              <input
+                matInput
+                placeholder="Age"
+                [(ngModel)]="loggedUser.age"
+                name="age"
+              />
+            </mat-form-field>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <mat-form-field>
+              <input
+                matInput
+                placeholder="email"
+                [(ngModel)]="loggedUser.email"
+                name="email"
+              />
+            </mat-form-field>
           </td>
         </tr>
       </table>

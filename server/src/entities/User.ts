@@ -11,7 +11,7 @@ export class User extends BaseEntity {
   id: number;
 
   /* the field decorator will send the query back to the user aka can be used in the front end
-   and this are the field required to be filled in by the user
+   and these are the field required to be filled in by the user
   */
   @Field()
   @Column()
@@ -22,7 +22,7 @@ export class User extends BaseEntity {
   lastName: string;
 
   @Field()
-  @Column("INTEGER")
+  @Column({ type: "int" })
   age: number;
 
   @Field()
@@ -33,6 +33,9 @@ export class User extends BaseEntity {
 
   @Column()
   password: string;
+
+  @Column({ type: "tinyint", default: false })
+  confirmed: boolean;
 
   @Column("timestamp", {
     default: () => "CURRENT_TIMESTAMP"

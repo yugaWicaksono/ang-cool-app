@@ -10,6 +10,7 @@ import cors from "cors";
 import { RegisterResolver } from "./resolvers/user/Registration";
 import { LoginResolver } from "./resolvers/user/Login";
 import { LoggedUserResolver } from "./resolvers/user/LoggedUser";
+import { ConfirmUserResolver } from "./resolvers/user/ConfirmedUser";
 
 const main = async () => {
   // build the schema
@@ -19,7 +20,12 @@ const main = async () => {
   await createConnections();
 
   const schema = await buildSchema({
-    resolvers: [RegisterResolver, LoginResolver, LoggedUserResolver],
+    resolvers: [
+      RegisterResolver,
+      LoginResolver,
+      LoggedUserResolver,
+      ConfirmUserResolver
+    ],
     authChecker: ({ context: { req } }) => {
       console.log(req.session.userId);
       return !!req.session.userId; // if undefined return false, if set return true

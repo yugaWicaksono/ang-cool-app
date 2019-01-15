@@ -3,6 +3,8 @@ import bcrypt from "bcryptjs";
 import { User } from "../../entities/User";
 import { RegisterInput } from "./register/RegisterInput";
 import { isAuth } from "../../middleware/isAuth";
+import { sendEmail } from "../../util/sendEmail";
+import { createConfirmationUrl } from "../../util/createConfirmationUrl";
 
 @Resolver()
 export class RegisterResolver {
@@ -12,7 +14,7 @@ export class RegisterResolver {
     return "hello this is a test";
   }
 
-  @Mutation(() => Boolean)
+  @Mutation(() => User)
   /* this is mutation function that when it is called will send data back to database */
   async Registration(@Arg("userData")
   {
@@ -21,7 +23,7 @@ export class RegisterResolver {
     age,
     email,
     password
-  }: RegisterInput) {
+  }: RegisterInput): Promise<User> {
     const hashedPassword = await bcrypt.hash(password, 12);
 
     const user = await User.create({
@@ -32,7 +34,7 @@ export class RegisterResolver {
       password: hashedPassword
     }).save();
 
-    user;
-    return true;
+    await sendEmail(email, await createConfirmationUrl(user.id));
+    return user;
   }
 }

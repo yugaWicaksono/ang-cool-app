@@ -1,12 +1,13 @@
 import "reflect-metadata";
 import { ApolloServer } from "apollo-server-express";
 import Express from "express";
-import { buildSchema, formatArgumentValidationError } from "type-graphql";
+import { formatArgumentValidationError } from "type-graphql";
 import { createConnections } from "typeorm";
 import session from "express-session";
 import connectRedis from "connect-redis";
 import { redis } from "./redis";
 import cors from "cors";
+import { createSchema } from "./utils/createSchema";
 
 const main = async () => {
   // build the schema
@@ -15,13 +16,7 @@ const main = async () => {
 
   await createConnections();
 
-  const schema = await buildSchema({
-    resolvers: [__dirname + "../../**/*.resolver.ts"],
-    authChecker: ({ context: { req } }) => {
-      console.log(req.session.userId);
-      return !!req.session.userId; // if undefined return false, if set return true
-    }
-  });
+  const schema = await createSchema();
 
   // create the apollo server
   const apolloServer = new ApolloServer({
@@ -57,7 +52,7 @@ const main = async () => {
       cookie: {
         httpOnly: true,
         secure: false, //process.env.NODE_ENV === "production",
-        maxAge: 1000 * 60 * 60 * 4 // --> prior 4 hours(msec,sec,minute,hours,days)
+        maxAge: 1000 * 60 * 60 * 4 // -->  4 hours(msec,sec,minute,hours,days)
       }
     } as any)
   );

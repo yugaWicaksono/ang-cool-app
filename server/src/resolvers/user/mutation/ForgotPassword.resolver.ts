@@ -1,6 +1,6 @@
 import { Resolver, Mutation, Arg } from "type-graphql";
-import { sendEmail } from "../../../util/sendEmail";
-import { forgotPasswordConfirm } from "../../../util/forgotPasswordConfirm";
+import { sendEmail } from "../../../utils/sendEmail";
+import { forgotPasswordConfirm } from "../../../utils/forgotPasswordConfirm";
 import { User } from "../../../entities/User";
 
 @Resolver()

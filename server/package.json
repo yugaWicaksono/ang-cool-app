@@ -6,7 +6,8 @@
   "main": "src/index.ts",
   "scripts": {
     "start": "ts-node-dev --respawn src/index.ts",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "db:setup": "ts-node src/test-utils/setup.ts",
+    "test": "npm run db:setup && npm t"
   },
   "keywords": [],
   "author": "Yuga Wicaksono",

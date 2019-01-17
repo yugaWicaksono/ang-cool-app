@@ -1,7 +1,7 @@
 import { InputType, Field } from "type-graphql";
 import { Length, IsNumber, IsEmail } from "class-validator";
 import { IsEmailAlreadyExists } from "../../../../../err_messages/user/register/IsEmailAlreadyExists";
-import { PasswordInput } from "../../../../../resolvers/shared/Passwordnput";
+import { PasswordInput } from "../../../../../resolvers/shared/PasswordInput";
 
 @InputType()
 export class RegisterInput extends PasswordInput {

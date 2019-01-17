@@ -3,8 +3,8 @@ import bcrypt from "bcryptjs";
 import { User } from "../../../entities/User";
 import { RegisterInput } from "../../user/mutation/types/register/RegisterInput";
 import { isAuth } from "../../../middleware/isAuth";
-import { sendEmail } from "../../../util/sendEmail";
-import { createConfirmationUrl } from "../../../util/createConfirmationUrl";
+// import { sendEmail } from "../../../utils/sendEmail";
+// import { createConfirmationUrl } from "../../../utils/createConfirmationUrl";
 
 @Resolver()
 export default class RegisterResolver {
@@ -16,7 +16,7 @@ export default class RegisterResolver {
 
   @Mutation(() => User)
   /* this is mutation function that when it is called will send data back to database */
-  async Registration(@Arg("userData")
+  async registration(@Arg("userData")
   {
     firstName,
     lastName,
@@ -34,7 +34,7 @@ export default class RegisterResolver {
       password: hashedPassword
     }).save();
 
-    await sendEmail(email, await createConfirmationUrl(user.id));
+    // await sendEmail(email, await createConfirmationUrl(user.id));
     return user;
   }
 }

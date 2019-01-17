@@ -7,13 +7,6 @@ import session from "express-session";
 import connectRedis from "connect-redis";
 import { redis } from "./redis";
 import cors from "cors";
-import { RegisterResolver } from "./resolvers/user/Registration";
-import { LoginResolver } from "./resolvers/user/Login";
-import { LoggedUserResolver } from "./resolvers/user/LoggedUser";
-import { ConfirmUserResolver } from "./resolvers/user/ConfirmUser";
-import { ForgotPasswordResolver } from "./resolvers/user/ForgotPassword";
-import { ChangePasswordResolver } from "./resolvers/user/ChangePassword";
-import { LogoutResolver } from "./resolvers/user/Logout";
 
 const main = async () => {
   // build the schema
@@ -23,15 +16,7 @@ const main = async () => {
   await createConnections();
 
   const schema = await buildSchema({
-    resolvers: [
-      RegisterResolver,
-      LoginResolver,
-      LogoutResolver,
-      LoggedUserResolver,
-      ConfirmUserResolver,
-      ForgotPasswordResolver,
-      ChangePasswordResolver
-    ],
+    resolvers: [__dirname + "../../**/*.resolver.ts"],
     authChecker: ({ context: { req } }) => {
       console.log(req.session.userId);
       return !!req.session.userId; // if undefined return false, if set return true

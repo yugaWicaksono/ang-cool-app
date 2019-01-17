@@ -1,10 +1,10 @@
 import { Resolver, Mutation, Arg, Ctx } from "type-graphql";
 import bcrypt from "bcryptjs";
-import { User } from "../../entities/User";
-import { UserContext } from "../../types/UserContext";
+import { User } from "../../../entities/User";
+import { UserContext } from "../../../types/UserContext";
 
 @Resolver()
-export class LoginResolver {
+export default class LoginResolver {
   @Mutation(() => User, { nullable: true })
   /* this is mutation function that when it is called will send data back to database */
   async login(

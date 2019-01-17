@@ -1,10 +1,10 @@
 import { Resolver, Ctx, Query, UseMiddleware } from "type-graphql";
-import { User } from "../../entities/User";
-import { UserContext } from "../../types/UserContext";
-import { isAuth } from "../../middleware/isAuth";
+import { User } from "../../../entities/User";
+import { UserContext } from "../../../types/UserContext";
+import { isAuth } from "../../../middleware/isAuth";
 
 @Resolver()
-export class LoggedUserResolver {
+export default class LoggedUserResolver {
   @UseMiddleware(isAuth)
   @Query(() => User, { nullable: true })
   async loggedUser(@Ctx() ctx: UserContext): Promise<User | undefined> {
